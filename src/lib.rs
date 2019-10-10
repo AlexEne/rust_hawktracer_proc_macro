@@ -1,4 +1,6 @@
 extern crate proc_macro;
+
+#[cfg(feature = "profiling_enabled")]
 extern crate rust_hawktracer_sys;
 use proc_macro::TokenStream;
 
@@ -30,6 +32,6 @@ pub fn hawktracer(args: TokenStream, input: TokenStream) -> TokenStream {
 
 #[proc_macro_attribute]
 #[cfg(not(feature = "profiling_enabled"))]
-pub fn hawktracer(args: TokenStream, input: TokenStream) -> TokenStream {
+pub fn hawktracer(_: TokenStream, input: TokenStream) -> TokenStream {
     input
 }
