@@ -2,9 +2,8 @@ extern crate proc_macro;
 extern crate rust_hawktracer_sys;
 use proc_macro::TokenStream;
 
-use rust_hawktracer_sys::ScopedTracepoint;
-
 #[proc_macro_attribute]
+#[cfg(feature = "profiling_enabled")]
 pub fn hawktracer(args: TokenStream, input: TokenStream) -> TokenStream {
     let args = args.into_iter().next().unwrap_or_else(||
         panic!("\n[rust_hawktracer] Please specify the profile tag: \n #[rust_hawktracer(tag)]\nfn my method() {\n...\n}\n")
@@ -27,4 +26,10 @@ pub fn hawktracer(args: TokenStream, input: TokenStream) -> TokenStream {
     // panic!(input);
 
     input.parse().unwrap()
+}
+
+#[proc_macro_attribute]
+#[cfg(not(feature = "profiling_enabled"))]
+pub fn hawktracer(args: TokenStream, input: TokenStream) -> TokenStream {
+    input
 }
