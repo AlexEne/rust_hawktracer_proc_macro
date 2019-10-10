@@ -1,0 +1,17 @@
+[package]
+name = "rust_hawktracer_proc_macro"
+version = "0.1.0"
+authors = ["Alexandru <alex.ene0x11@gmail.com>"]
+edition = "2018"
+
+[features]
+profiling_enabled = []
+generate_bindings=[]
+
+[dependencies.rust_hawktracer_sys]
+version = "0.1"
+path = "../rust_hawktracer_sys"
+features = ["profiling_enabled", "generate_bindings"]
+
+[lib]
+proc-macro = true
