@@ -4,6 +4,9 @@ version = "0.1.0"
 authors = ["Alexandru <alex.ene0x11@gmail.com>"]
 edition = "2018"
 license = "MIT/Apache-2.0"
+description = "helper crate for hawktracer profiling library."
+repository = "https://github.com/AlexEne/rust_hawktracer_proc_macro"
+readme = "README.md"
 
 [features]
 profiling_enabled = ["rust_hawktracer_sys"]
