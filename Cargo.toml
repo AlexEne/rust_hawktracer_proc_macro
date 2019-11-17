@@ -1,6 +1,6 @@
 [package]
 name = "rust_hawktracer_proc_macro"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Alexandru <alex.ene0x11@gmail.com>"]
 edition = "2018"
 license = "MIT/Apache-2.0"
