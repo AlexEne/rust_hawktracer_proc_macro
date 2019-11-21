@@ -14,8 +14,14 @@ pub fn hawktracer(args: TokenStream, input: TokenStream) -> TokenStream {
 
     let string_to_insert = format!(
         r#"
-            let __scoped_tracepoint_name_{} = concat!(stringify!({}), "\0");
-            ScopedTracepoint::start_trace(__scoped_tracepoint_name_{}.as_ptr() as _);
+            thread_local! {{
+                static tracepoint_id_{}: u64 = add_cached_mapping(concat!(stringify!({}), "\0").as_ptr() as _);
+            }};
+            
+            tracepoint_id_{}.with(|id| {{
+                ScopedTracepoint::start_trace_id(*id);
+            }});
+            
             let __scoped_tracepoint_{} = ScopedTracepoint {{}};
         "#,
         args, args, args, args
